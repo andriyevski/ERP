@@ -10,10 +10,25 @@
     <div class="bg_head">
         <h3>{{ name }}</h3>
     </div>
-    <form action="" method="POST">
-    {{ client_num }}
-    {{ project_name }}
-    <input type="Submit" name="submit" value="Submit"/>
+    <form method="POST">
+        {% csrf_token %} 
+        <div class="form_line">
+            <span>{{ client_num }}</span>
+            <select name="user_profile_color_1">
+                {% for clients in client %}
+                <option value="1">{{ clients }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form_line_two">
+            <span>{{ project_name }}</span>
+            <select name="user_profile_color_1">
+                {% for project_ids in project_id %}
+                <option value="1">{{ project_ids }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <input type="Submit" name="submit" value="Создать проект"/>
     </form>
     
     {% if submitbutton == "Submit" %}
