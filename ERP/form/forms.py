@@ -1,9 +1,6 @@
-from dataclasses import fields
-from .models import Client,Project_Num
-from django.forms import ModelForm
+from .models import Project_Num,Client
+from django import forms
 
-class formForm(ModelForm):
-    class Meta:
-        model = Client
-        fields = ['']
-    
+class saveForm(forms.Form):
+    id_dep_client = forms.ModelChoiceField(empty_label=None, queryset=Client.objects.all(), label='Клиент №:')
+    id_project = forms.ModelChoiceField(empty_label=None, queryset=Project_Num.objects.all(), label='Проект №:')

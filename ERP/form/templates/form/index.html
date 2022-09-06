@@ -6,35 +6,35 @@
     <meta charset="UTF-8">
     <title>User Information Form</title>
 </head>
-<body>
+{% block content %}
     <div class="bg_head">
         <h3>{{ name }}</h3>
     </div>
-    <form method="POST">
-        {% csrf_token %} 
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+
+        <!-- {% comment %} -->
+        <!-- {{ form.as_p }} -->
+        <!-- {% endcomment %} -->
         <div class="form_line">
-            <span>{{ client_num }}</span>
-            <select name="user_profile_color_1">
-                {% for clients in client %}
-                <option value="1">{{ clients }}</option>
+            <span for="{{ form.id_dep_client.id_for_label }}">Клиент №:</span>
+            <select class="id_dep_client" name="id_dep_client"> 
+                {% for clients in form.id_dep_client %}
+                <option for="{{ clients }}">
+                </option>
                 {% endfor %}
             </select>
         </div>
         <div class="form_line_two">
-            <span>{{ project_name }}</span>
-            <select name="user_profile_color_1">
-                {% for project_ids in project_id %}
-                <option value="1">{{ project_ids }}</option>
+            <span >Проект №:</span>
+            <select class="id_project" name="id_project">
+                {% for project_ids in form.id_project %}
+                <option for="{{ project_ids }}">
+                </option>
                 {% endfor %}
             </select>
         </div>
-    <input type="Submit" name="submit" value="Создать проект"/>
+        <button type="submit">Создать проект</button>
     </form>
     
-    {% if submitbutton == "Submit" %}
-    <h1>Your first name is {{ firstname }}</h1>
-    <h1>Your last name is {{ lastname }}</h1>
-    <h1>Your email is {{ emailvalue }}</h1>
-    {% endif %}
-    
-</body> 
+{% endblock %}
